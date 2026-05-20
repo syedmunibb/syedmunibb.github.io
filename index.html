@@ -8,61 +8,137 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; scroll-behavior: smooth; }
-h1, h2, h3, h4 { font-family: 'Space Grotesk', monospace; letter-spacing: -0.02em; }
+    /* Base Styles */
+    body { 
+      font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+      scroll-behavior: smooth; 
+    }
+    h1, h2, h3, h4 { 
+      font-family: 'Space Grotesk', monospace; 
+      letter-spacing: -0.02em; 
+    }
+    
+    /* Animated Gradient Background */
+    body {
+      background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+      background-size: 200% 200%;
+      animation: gradientShift 10s ease infinite;
+      position: relative;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Loading Animation - Fade In */
+    body {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    section {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Hero Background */
     .hero-bg {
       background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 45%),
                   radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.05), transparent 40%),
-                  #020617;
+                  transparent;
     }
-    /* Premium gradient background for entire site */
-body {
-  background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
-  position: relative;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-section {
-  position: relative;
-  z-index: 1;
-}
+    
+    /* Glass Card Styles */
     .glass-card {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-card:hover {
-  border-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 0 30px rgba(16, 185, 129, 0.1);
-  transform: translateY(-4px);
-}
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(16, 185, 129, 0.3);
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.1);
+      transform: translateY(-4px);
+    }
+    
+    /* Progress Bar Animation */
+    .progress-bar {
+      width: 0%;
+      animation: fillProgress 1.5s ease-out forwards;
+    }
+    
+    @keyframes fillProgress {
+      from { width: 0%; }
+      to { width: var(--width); }
+    }
+    
+    /* Custom Animation for Logo */
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 8s linear infinite;
+    }
+    
+    /* Back to Top Button */
+    #backToTop {
+      transition: all 0.3s ease;
+    }
+    #backToTop:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Cursor typing effect */
+    .typed-cursor {
+      display: inline-block;
+      width: 3px;
+      background-color: #10b981;
+      margin-left: 4px;
+      animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-300 antialiased">
+<body class="text-slate-300 antialiased">
 
   <!-- Navbar -->
   <nav class="fixed top-0 w-full bg-slate-950/75 backdrop-blur-md border-b border-slate-900 z-50 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      
       <div class="flex items-center space-x-1">
-  <svg class="w-8 h-8 text-emerald-400 animate-spin-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-    <path stroke-linecap="round" stroke-linejoin="round" d="MInfinity-Path-Placeholder 16.5 10.5V6.75a4.5 4.5 0 00-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12c0-2.5 2-4.5 4.5-4.5s4.5 4.5 9 9 4.5-4.5 4.5-4.5-2-4.5-4.5-4.5-4.5 4.5-9 9-4.5-4.5-4.5-4.5z" />
-  </svg>
-</div>
+        <svg class="w-8 h-8 text-emerald-400 animate-spin-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+      </div>
       <div class="hidden md:flex gap-8 text-sm font-medium">
         <a href="#about" class="hover:text-emerald-400 transition-colors duration-300">About</a>
         <a href="#skills" class="hover:text-emerald-400 transition-colors duration-300">Skills</a>
@@ -78,32 +154,30 @@ section {
     <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center w-full">
       <div class="space-y-6 order-2 md:order-1 text-center md:text-left">
         <div class="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500/15 to-teal-500/15 border border-emerald-500/30 text-emerald-400 px-5 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-sm shadow-lg shadow-emerald-500/10">
-  <span class="relative flex h-2 w-2">
-    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-  </span>
-  Available for Opportunities
-</div>
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          Available for Opportunities
+        </div>
         <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-4">
-  DevOps <span class="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">Engineer</span>
-</h1>
+          <span id="typed-text" class="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">DevOps Engineer</span>
+        </h1>
         <p class="text-lg text-slate-400 max-w-lg mx-auto md:mx-0 leading-relaxed">
           Hi, I'm <span class="text-white font-medium">Syed Munib Ali Shah</span>. I specialize in turning complex deployments into automated, scalable, and resilient systems.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
           <a href="#projects" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-slate-950 font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-emerald-500/25 text-center">
-  View My Work
-</a>
+            View My Work
+          </a>
         </div>
       </div>
 
       <!-- Profile Picture -->
       <div class="flex justify-center order-1 md:order-2">
         <div class="relative group">
-          <!-- Multi-layered Glow Effect -->
           <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
           <div class="relative w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-slate-800 bg-slate-900">
-            <!-- UPDATE THIS SRC PATH WITH YOUR ACTUAL IMAGE FILE NAME -->
             <img src="images/3.jpg" 
                  alt="Syed Munib Ali Shah" 
                  class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500 transform hover:scale-105">
@@ -116,9 +190,6 @@ section {
   <!-- About Section -->
   <section id="about" class="py-28 border-t border-slate-900 bg-gradient-to-b from-slate-900/20 to-transparent">
   <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
-    <div class="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-medium mb-4">
-      Who Am I?
-    </div>
     <h2 class="text-4xl font-bold text-white tracking-tight">About Me</h2>
     <div class="h-0.5 w-16 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto rounded-full"></div>
     <p class="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto">
@@ -128,57 +199,115 @@ section {
   </div>
 </section>
 
-  <!-- Skills Section -->
+  <!-- Skills Section with Progress Bars -->
   <section id="skills" class="py-28 border-t border-slate-900">
     <div class="max-w-6xl mx-auto px-6 space-y-12">
       <div class="text-center space-y-3">
         <h2 class="text-3xl font-bold text-white tracking-tight">Tech Stack</h2>
-        <div class="h-0.5 w-20 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto rounded-full"></div>
+        <div class="h-0.5 w-16 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto rounded-full"></div>
         <p class="text-slate-500 text-sm">Tools and technologies I use to build automated environments</p>
       </div>
       
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Docker -->
-        <div class="glass-card p-6 rounded-2xl card-glow transition-all duration-300 text-center space-y-3 group">
-          <i class="fa-brands fa-docker text-4xl text-slate-500 group-hover:text-sky-400 transition-colors duration-300"></i>
-          <p class="text-sm font-medium text-slate-400 group-hover:text-slate-200 transition-colors duration-300">Docker</p>
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-3">
+              <i class="fa-brands fa-docker text-2xl text-sky-400"></i>
+              <span class="font-medium text-white">Docker</span>
+            </div>
+            <span class="text-emerald-400 text-sm">85%</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-2">
+            <div class="progress-bar bg-gradient-to-r from-emerald-400 to-teal-400 h-2 rounded-full" style="--width: 85%; width: 85%;"></div>
+          </div>
         </div>
+        
         <!-- Kubernetes -->
-        <div class="glass-card p-6 rounded-2xl card-glow transition-all duration-300 text-center space-y-3 group">
-          <i class="fa-solid fa-cube text-4xl text-slate-500 group-hover:text-blue-500 transition-colors duration-300"></i>
-          <p class="text-sm font-medium text-slate-400 group-hover:text-slate-200 transition-colors duration-300">Kubernetes</p>
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-cube text-2xl text-blue-400"></i>
+              <span class="font-medium text-white">Kubernetes</span>
+            </div>
+            <span class="text-emerald-400 text-sm">80%</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-2">
+            <div class="progress-bar bg-gradient-to-r from-emerald-400 to-teal-400 h-2 rounded-full" style="--width: 80%; width: 80%;"></div>
+          </div>
         </div>
+        
         <!-- AWS -->
-        <div class="glass-card p-6 rounded-2xl card-glow transition-all duration-300 text-center space-y-3 group">
-          <i class="fa-brands fa-aws text-4xl text-slate-500 group-hover:text-orange-400 transition-colors duration-300"></i>
-          <p class="text-sm font-medium text-slate-400 group-hover:text-slate-200 transition-colors duration-300">AWS</p>
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-3">
+              <i class="fa-brands fa-aws text-2xl text-orange-400"></i>
+              <span class="font-medium text-white">AWS</span>
+            </div>
+            <span class="text-emerald-400 text-sm">75%</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-2">
+            <div class="progress-bar bg-gradient-to-r from-emerald-400 to-teal-400 h-2 rounded-full" style="--width: 75%; width: 75%;"></div>
+          </div>
         </div>
+        
         <!-- Terraform -->
-        <div class="glass-card p-6 rounded-2xl card-glow transition-all duration-300 text-center space-y-3 group">
-          <span class="text-3xl font-bold text-slate-600 group-hover:text-purple-400 transition-colors duration-300 block font-mono">TF</span>
-          <p class="text-sm font-medium text-slate-400 group-hover:text-slate-200 transition-colors duration-300">Terraform</p>
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl font-mono font-bold text-purple-400">TF</span>
+              <span class="font-medium text-white">Terraform</span>
+            </div>
+            <span class="text-emerald-400 text-sm">70%</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-2">
+            <div class="progress-bar bg-gradient-to-r from-emerald-400 to-teal-400 h-2 rounded-full" style="--width: 70%; width: 70%;"></div>
+          </div>
         </div>
-        <!-- Linux -->
-        <div class="glass-card p-6 rounded-2xl card-glow transition-all duration-300 text-center space-y-3 group flex flex-col justify-center items-center col-span-2 sm:col-span-1">
-          <i class="fa-solid fa-terminal text-4xl text-slate-500 group-hover:text-emerald-400 transition-colors duration-300"></i>
-          <p class="text-sm font-medium text-slate-400 group-hover:text-slate-200 transition-colors duration-300 mt-3">Linux & Bash</p>
+        
+        <!-- Linux & Bash -->
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-terminal text-2xl text-emerald-400"></i>
+              <span class="font-medium text-white">Linux & Bash</span>
+            </div>
+            <span class="text-emerald-400 text-sm">90%</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-2">
+            <div class="progress-bar bg-gradient-to-r from-emerald-400 to-teal-400 h-2 rounded-full" style="--width: 90%; width: 90%;"></div>
+          </div>
+        </div>
+        
+        <!-- CI/CD -->
+        <div class="glass-card p-6 rounded-2xl">
+          <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-code-branch text-2xl text-yellow-400"></i>
+              <span class="font-medium text-white">CI/CD Pipelines</span>
+            </div>
+            <span class="text-emerald-400 text-sm">85%</span>
+          </div>
+          <div class="w-full bg-slate-800 rounded-full h-2">
+            <div class="progress-bar bg-gradient-to-r from-emerald-400 to-teal-400 h-2 rounded-full" style="--width: 85%; width: 85%;"></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
+  <!-- Projects Section with Buttons -->
   <section id="projects" class="py-28 border-t border-slate-900 bg-gradient-to-r from-slate-900/10 via-transparent to-slate-900/10">
     <div class="max-w-6xl mx-auto px-6 space-y-12">
       <div class="text-center space-y-3">
         <h2 class="text-3xl font-bold text-white tracking-tight">Featured Projects</h2>
-        <div class="h-0.5 w-20 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto rounded-full"></div>
+        <div class="h-0.5 w-16 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto rounded-full"></div>
         <p class="text-slate-500 text-sm">Real-world engineering solutions</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-6">
         <!-- Card 1 -->
-        <div class="glass-card rounded-2xl p-8 hover:border-slate-700 transition-all duration-300 flex flex-col justify-between group">
+        <div class="glass-card rounded-2xl p-8 transition-all duration-300 flex flex-col justify-between group">
           <div class="space-y-4">
             <div class="flex justify-between items-start">
               <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 text-emerald-400 group-hover:border-emerald-500/20 transition-all duration-300">
@@ -193,10 +322,14 @@ section {
             <span class="bg-slate-900 border border-slate-800 text-slate-400 text-xs px-3 py-1 rounded-md">Docker</span>
             <span class="bg-slate-900 border border-slate-800 text-slate-400 text-xs px-3 py-1 rounded-md">AWS</span>
           </div>
+          <div class="flex gap-3 mt-4">
+            <a href="#" class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-md hover:bg-emerald-500 hover:text-slate-950 transition-all">GitHub</a>
+            <a href="#" class="text-xs bg-slate-800 text-slate-300 px-3 py-1.5 rounded-md hover:bg-slate-700 transition-all">Live Demo</a>
+          </div>
         </div>
 
         <!-- Card 2 -->
-        <div class="glass-card rounded-2xl p-8 hover:border-slate-700 transition-all duration-300 flex flex-col justify-between group">
+        <div class="glass-card rounded-2xl p-8 transition-all duration-300 flex flex-col justify-between group">
           <div class="space-y-4">
             <div class="flex justify-between items-start">
               <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 text-blue-400 group-hover:border-blue-500/20 transition-all duration-300">
@@ -211,10 +344,14 @@ section {
             <span class="bg-slate-900 border border-slate-800 text-slate-400 text-xs px-3 py-1 rounded-md">Docker</span>
             <span class="bg-slate-900 border border-slate-800 text-slate-400 text-xs px-3 py-1 rounded-md">Grafana</span>
           </div>
+          <div class="flex gap-3 mt-4">
+            <a href="#" class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-md hover:bg-emerald-500 hover:text-slate-950 transition-all">GitHub</a>
+            <a href="#" class="text-xs bg-slate-800 text-slate-300 px-3 py-1.5 rounded-md hover:bg-slate-700 transition-all">Live Demo</a>
+          </div>
         </div>
 
         <!-- Card 3 -->
-        <div class="glass-card rounded-2xl p-8 hover:border-slate-700 transition-all duration-300 flex flex-col justify-between group">
+        <div class="glass-card rounded-2xl p-8 transition-all duration-300 flex flex-col justify-between group">
           <div class="space-y-4">
             <div class="flex justify-between items-start">
               <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 text-purple-400 group-hover:border-purple-500/20 transition-all duration-300">
@@ -228,10 +365,14 @@ section {
             <span class="bg-slate-900 border border-slate-800 text-slate-400 text-xs px-3 py-1 rounded-md">Terraform</span>
             <span class="bg-slate-900 border border-slate-800 text-slate-400 text-xs px-3 py-1 rounded-md">AWS</span>
           </div>
+          <div class="flex gap-3 mt-4">
+            <a href="#" class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-md hover:bg-emerald-500 hover:text-slate-950 transition-all">GitHub</a>
+            <a href="#" class="text-xs bg-slate-800 text-slate-300 px-3 py-1.5 rounded-md hover:bg-slate-700 transition-all">Live Demo</a>
+          </div>
         </div>
 
         <!-- Card 4 -->
-        <div class="glass-card rounded-2xl p-8 hover:border-slate-700 transition-all duration-300 flex flex-col justify-between group">
+        <div class="glass-card rounded-2xl p-8 transition-all duration-300 flex flex-col justify-between group">
           <div class="space-y-4">
             <div class="flex justify-between items-start">
               <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 text-orange-400 group-hover:border-orange-500/20 transition-all duration-300">
@@ -246,6 +387,10 @@ section {
             <span class="bg-slate-900 border border-slate-800 text-slate-400 text-xs px-3 py-1 rounded-md">Nginx</span>
             <span class="bg-slate-900 border border-slate-800 text-slate-400 text-xs px-3 py-1 rounded-md">Node.js</span>
           </div>
+          <div class="flex gap-3 mt-4">
+            <a href="#" class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-md hover:bg-emerald-500 hover:text-slate-950 transition-all">GitHub</a>
+            <a href="#" class="text-xs bg-slate-800 text-slate-300 px-3 py-1.5 rounded-md hover:bg-slate-700 transition-all">Live Demo</a>
+          </div>
         </div>
       </div>
     </div>
@@ -255,7 +400,7 @@ section {
   <section id="education" class="py-28 border-t border-slate-900">
     <div class="max-w-4xl mx-auto px-6 text-center space-y-8">
       <h2 class="text-3xl font-bold text-white tracking-tight">Education</h2>
-      <div class="h-0.5 w-20 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto rounded-full"></div>
+      <div class="h-0.5 w-16 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto rounded-full"></div>
       <div class="glass-card inline-block rounded-2xl px-10 py-8 border border-slate-900 text-left sm:text-center">
         <h3 class="text-xl font-bold text-white">Bachelor of Computer Science (BSCS)</h3>
         <p class="text-emerald-400 font-medium mt-1">Iqra University • Graduation Year: 2022</p>
@@ -263,19 +408,30 @@ section {
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- Contact Section with Form -->
   <section id="contact" class="py-24 border-t border-slate-900 bg-gradient-to-t from-slate-900/30 to-transparent">
     <div class="max-w-6xl mx-auto px-6 text-center space-y-8">
       <div class="space-y-2">
         <h2 class="text-3xl font-bold text-white tracking-tight">Let's Connect</h2>
-        <div class="h-0.5 w-20 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto rounded-full"></div>
+        <div class="h-0.5 w-16 bg-gradient-to-r from-emerald-400 to-teal-400 mx-auto rounded-full"></div>
         <p class="text-slate-500 text-sm max-w-sm mx-auto">Drop an email or connect across networks for project talks.</p>
       </div>
       
-      <div class="flex justify-center gap-8 text-3xl">
-        <a href="https://github.com/syedmunibb" target="_blank" class="text-slate-500 hover:text-white transition-all duration-300 hover:scale-110 inline-block"><i class="fa-brands fa-github text-3xl"></i></a>
-<a href="https://linkedin.com" target="_blank" class="text-slate-500 hover:text-emerald-400 transition-all duration-300 hover:scale-110 inline-block"><i class="fa-brands fa-linkedin text-3xl"></i></a>
-<a href="mailto:syedmunibb25@gmail.com" class="text-slate-500 hover:text-teal-400 transition-all duration-300 hover:scale-110 inline-block"><i class="fa-solid fa-envelope text-3xl"></i></a>
+      <!-- Contact Form -->
+      <div class="max-w-md mx-auto">
+        <form id="contactForm" class="space-y-4">
+          <input type="text" id="name" placeholder="Your Name" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-slate-300 focus:border-emerald-400 focus:outline-none transition-all">
+          <input type="email" id="email" placeholder="Email Address" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-slate-300 focus:border-emerald-400 focus:outline-none transition-all">
+          <textarea id="message" rows="4" placeholder="Your Message" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-slate-300 focus:border-emerald-400 focus:outline-none transition-all"></textarea>
+          <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-semibold py-3 rounded-lg hover:scale-105 transition-all duration-300">Send Message</button>
+        </form>
+        <p id="formStatus" class="text-sm mt-3"></p>
+      </div>
+      
+      <div class="flex justify-center gap-8 text-3xl pt-4">
+        <a href="https://github.com/syedmunibb" target="_blank" class="text-slate-500 hover:text-white transition-all duration-300 hover:scale-110 inline-block"><i class="fa-brands fa-github"></i></a>
+        <a href="https://linkedin.com/in/syedmunibb" target="_blank" class="text-slate-500 hover:text-emerald-400 transition-all duration-300 hover:scale-110 inline-block"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="mailto:syedmunibb25@gmail.com" class="text-slate-500 hover:text-teal-400 transition-all duration-300 hover:scale-110 inline-block"><i class="fa-solid fa-envelope"></i></a>
       </div>
     </div>
   </section>
@@ -284,9 +440,50 @@ section {
     © 2026 Syed Munib Ali Shah • Built with precision
   </footer>
 
-   <!-- Active Nav Highlight Script -->
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 p-3 rounded-full shadow-lg shadow-emerald-500/20 hidden transition-all duration-300 z-50">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- All Scripts -->
   <script>
-    // Active nav highlight on scroll
+    // 1. Typing Animation
+    const roles = ["DevOps Engineer", "Cloud Architect", "Automation Expert"];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typedTextElement = document.getElementById('typed-text');
+
+    function typeEffect() {
+      const currentRole = roles[roleIndex];
+      if (isDeleting) {
+        typedTextElement.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typedTextElement.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      if (!isDeleting && charIndex === currentRole.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, 2000);
+        return;
+      }
+
+      if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(typeEffect, 500);
+        return;
+      }
+
+      const speed = isDeleting ? 50 : 100;
+      setTimeout(typeEffect, speed);
+    }
+
+    typeEffect();
+
+    // 2. Active Nav Highlight on Scroll
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('nav a');
     
@@ -294,7 +491,6 @@ section {
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         if (scrollY >= (sectionTop - 200)) {
           current = section.getAttribute('id');
         }
@@ -306,6 +502,43 @@ section {
           link.classList.add('text-emerald-400');
         }
       });
+    });
+
+    // 3. Back to Top Button
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTop.classList.remove('hidden');
+      } else {
+        backToTop.classList.add('hidden');
+      }
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 4. Contact Form Handler
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      
+      formStatus.textContent = 'Sending message...';
+      formStatus.classList.add('text-emerald-400');
+      
+      // Simulate form submission (replace with actual endpoint)
+      setTimeout(() => {
+        formStatus.textContent = 'Message sent successfully! I will get back to you soon.';
+        formStatus.classList.add('text-emerald-400');
+        contactForm.reset();
+        setTimeout(() => {
+          formStatus.textContent = '';
+        }, 5000);
+      }, 1000);
     });
   </script>
 
